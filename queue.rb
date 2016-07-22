@@ -1,26 +1,37 @@
-require 'rspec/autorun'
+#require 'rspec/autorun'
 
 class Queue
-  def initialize(tab)
-    $table=tab
+  def initialize(tab=[])
+    @table=tab
   end
 
   def push(object)
-    $table.push(object)
+    @table.push(object)
   end
 
   def pop
-    $table.delete($table[0])
+    @table.pop(@table.size-1)
   end
 
   def size
-    $table.size
+    @table.size
   end
   def to_s
-   $table
+   @table
+  end
+
+  def process(activity)
+    @table.each do |i|
+      i.activity
+    end
   end
 end
 
+source_queue = Queue.new([1,2,3])
+target_queue = Queue.new
+target_queue.push(source_queue.pop)
+print target_queue.to_s
+=begin
 describe Queue do
   describe "#push" do
     it "dodaje element na koniec kolejki" do
@@ -52,3 +63,4 @@ describe Queue do
     end
   end
 end
+=end
